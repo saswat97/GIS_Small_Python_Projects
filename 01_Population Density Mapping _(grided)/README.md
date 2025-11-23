@@ -2,6 +2,21 @@
 
 A complete geospatial workflow for extracting and visualizing population and density patterns using open data.
 
+🎥 Related Content (Native GIS Youtube channel  / Live Session)
+
+This project is demonstrated in a 2-hour live session on the Native GIS YouTube channel:
+
+[https://youtu.be/rhyfa3VGzF0]
+The session walks through:
+
+  - Data download & AOI setup
+
+  - Code explanation line-by-line
+
+  - Live map interpretation and Q&A
+
+  - How to turn this project into a portfolio asset
+    
 
 ## 📌 1. What This Project Is About
 
@@ -180,4 +195,93 @@ This project highlights expertise in:
 
 - Reproducible notebook workflow
 
+## ⚙️ 6 . Technical Workflow (GIS + Python)
+
+Below is the complete geospatial workflow used in this project.
+
+### **STEP 1 — Data Loading & Inspection**
+- Mount Google Drive in Colab
+- Load the WorldPop raster  
+- Inspect CRS, resolution, and bounds  
+- Identify nodata values (e.g., -99999)
+
+### **STEP 2 — Create AOI Polygon**
+- Use bounding box for Indirapuram  
+- Store as GeoDataFrame (EPSG:4326)  
+
+### **STEP 3 — Clip Raster to AOI**
+- Use `rasterio.mask.mask()`  
+- Produce a clean raster only for Indirapuram  
+
+### **STEP 4 — Reproject AOI to Meters CRS**
+- Convert AOI to EPSG:3857  
+- Required for grid creation in meters  
+- Ensures accurate grid size (500m)
+
+### **STEP 5 — Create a 500m Fishnet Grid**
+- Use numpy range over AOI bounds  
+- Build square polygons (500m × 500m)  
+- Clip to AOI  
+- Reproject grid → raster CRS
+
+### **STEP 6 — Zonal Statistics**
+- Use `zonal_stats()`  
+- Compute:  
+  - `pop_sum` (total people)  
+  - `pop_mean`  
+- Mask nodata to avoid negative values  
+
+### **STEP 7 — Compute Population Density**
+- Reproject grid to EPSG:3857  
+- Compute area (km²)  
+- Calculate density = pop_sum / area_km2  
+
+### **STEP 8 — Mapping & Visualization**
+- Static maps using Matplotlib & Contextily  
+- Population grid (quantiles)  
+- Density hotspot map  
+- Interactive map using Folium (hover values)  
+
+### **STEP 9 — Export Results**
+- Save maps under `/outputs/maps/`  
+- Save tables under `/outputs/tables/`  
+- Save notebook for reproducibility  
+
+---
+
+## 📈 How to Adapt This Project to Another City
+
+To rerun for any other city or AOI:
+
+1. Obtain appropriate WorldPop population raster for that country/city.
+
+2. Replace the AOI bounding box coordinates with your new area.
+
+3. Optionally adjust:
+
+  -Grid size (e.g., 250m, 1km)
+
+  -CRS to a local projection (e.g., UTM zone)
+
+4.Keep the rest of the workflow unchanged:
+
+- Clip raster
+
+- Build grid
+
+- Run zonal stats
+
+- Export and plot
+
+This makes the notebook a reusable template for city-scale population mapping.
+
+## 🙌 Credits & Acknowledgements
+
+1. WorldPop – for open population data.
+
+2. OpenStreetMap contributors – for basemap data.
+
+3. Python open-source geospatial ecosystem:
+
+  - geopandas, rasterio, rasterstats, folium, contextily, matplotlib.
 
