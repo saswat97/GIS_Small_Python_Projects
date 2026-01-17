@@ -1,5 +1,16 @@
 # Building Footprint Extraction using Edge Detection (GIS + Python)
 
+## LiVE RECORDED VIDEO
+A complete geospatial workflow for extracting and visualizing Builing Footprints patterns using open data.
+
+🎥 Related Content (Native GIS Youtube channel / Live Session): 
+
+This project is demonstrated in a 2-hour live session on the Native GIS YouTube channel:
+
+
+
+
+
 ## 📌 Overview
 This project demonstrates a **baseline GIS + Computer Vision workflow** to extract
 **candidate building footprints** from high-resolution aerial imagery using
