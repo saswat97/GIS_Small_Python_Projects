@@ -1,0 +1,12 @@
+numpy
+rasterio
+geopandas
+shapely
+pyproj
+opencv-python
+matplotlib
+folium
+pystac-client
+planetary-computer
+osmnx
+pandas
